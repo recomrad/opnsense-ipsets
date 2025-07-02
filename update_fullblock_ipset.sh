@@ -38,7 +38,7 @@ fi
 
 pluginctl dns
 
-if (https://raw.githubusercontent.com/recomrad/opnsense-ipsets/main/update_fullblock_ipset.sh --no-verify-hostname -o /tmp/script.sh)
+if (fetch https://raw.githubusercontent.com/recomrad/opnsense-ipsets/main/update_fullblock_ipset.sh --no-verify-hostname -o /tmp/script.sh)
 then
     echo success-udpate-script
     cp /tmp/script.sh /usr/bin/update_fullblock_ipset.sh

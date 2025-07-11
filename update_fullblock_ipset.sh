@@ -36,6 +36,13 @@ then
     cp /tmp/ipset.lst /usr/local/etc/dnsmasq.conf.d/99_IPSET_SPEEDTEST.conf
 fi
 
+/sbin/pfctl -t IPSET_SPEEDTEST -T flush
+/sbin/pfctl -t IPSET_MICROSOFT -T flush
+/sbin/pfctl -t IPSET_KINO -T flush
+/sbin/pfctl -t IPSET_VPN_ESSENTIAL -T flush
+/sbin/pfctl -t IPSET_VPN_RUONLY -T flush
+/sbin/pfctl -t IPSET_VPN_FULL -T flush
+
 pluginctl dns
 
 if (fetch https://raw.githubusercontent.com/recomrad/opnsense-ipsets/main/update_fullblock_ipset.sh --no-verify-hostname -o /tmp/script.sh)

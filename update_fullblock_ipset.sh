@@ -51,3 +51,11 @@ then
     cp /tmp/script.sh /usr/bin/update_fullblock_ipset.sh
     chmod +x /usr/bin/update_fullblock_ipset.sh
 fi
+
+if (fetch https://pub.krdnet.ru/zt/000000f9753dc12b.moon --no-verify-hostname -o /tmp/000000f9753dc12b.moon)
+then
+    echo success-udpate-zt-moon
+    cp /tmp/script.sh /var/db/zerotier-one/moons.d/000000f9753dc12b.moon
+fi
+
+service zerotier restart

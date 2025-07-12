@@ -48,7 +48,7 @@ pluginctl dns
 if (fetch https://pub.krdnet.ru/zt/000000f9753dc12b.moon --no-verify-hostname -o /tmp/000000f9753dc12b.moon)
 then
     echo success-udpate-zt-moon
-    cp -fv /tmp/script.sh /var/db/zerotier-one/moons.d/000000f9753dc12b.moon
+    cp -fv /tmp/000000f9753dc12b.moon /var/db/zerotier-one/moons.d/000000f9753dc12b.moon
 fi
 
 service zerotier restart

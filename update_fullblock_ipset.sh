@@ -45,13 +45,6 @@ fi
 
 pluginctl dns
 
-if (fetch https://raw.githubusercontent.com/recomrad/opnsense-ipsets/main/update_fullblock_ipset.sh --no-verify-hostname -o /tmp/script.sh)
-then
-    echo success-udpate-script
-    cp -f /tmp/script.sh /usr/bin/update_fullblock_ipset.sh
-    chmod +x /usr/bin/update_fullblock_ipset.sh
-fi
-
 if (fetch https://pub.krdnet.ru/zt/000000f9753dc12b.moon --no-verify-hostname -o /tmp/000000f9753dc12b.moon)
 then
     echo success-udpate-zt-moon
@@ -59,3 +52,10 @@ then
 fi
 
 service zerotier restart
+
+if (fetch https://raw.githubusercontent.com/recomrad/opnsense-ipsets/main/update_fullblock_ipset.sh --no-verify-hostname -o /tmp/script.sh)
+then
+    echo success-udpate-script
+    cp -f /tmp/script.sh /usr/bin/update_fullblock_ipset.sh
+    chmod +x /usr/bin/update_fullblock_ipset.sh
+fi

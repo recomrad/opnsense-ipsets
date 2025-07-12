@@ -15,25 +15,25 @@ fi
 if (fetch https://raw.githubusercontent.com/recomrad/opnsense-ipsets/main/20_IPSET_VPN_ESSENTIAL.conf --no-verify-hostname -o /tmp/ipset.lst)
 then
     echo success-vpn-essential
-    cp /tmp/ipset.lst /usr/local/etc/dnsmasq.conf.d/20_IPSET_VPN_ESSENTIAL.conf
+    cp -f /tmp/ipset.lst /usr/local/etc/dnsmasq.conf.d/20_IPSET_VPN_ESSENTIAL.conf
 fi
 
 if (fetch https://raw.githubusercontent.com/recomrad/opnsense-ipsets/main/30_IPSET_KINO.conf --no-verify-hostname -o /tmp/ipset.lst)
 then
     echo success-vpn-kino
-    cp /tmp/ipset.lst /usr/local/etc/dnsmasq.conf.d/30_IPSET_KINO.conf
+    cp -f /tmp/ipset.lst /usr/local/etc/dnsmasq.conf.d/30_IPSET_KINO.conf
 fi
 
 if (fetch https://raw.githubusercontent.com/recomrad/opnsense-ipsets/main/40_IPSET_MICROSOFT.conf --no-verify-hostname -o /tmp/ipset.lst)
 then
     echo success-vpn-microsoft
-    cp /tmp/ipset.lst /usr/local/etc/dnsmasq.conf.d/40_IPSET_MICROSOFT.conf
+    cp -f /tmp/ipset.lst /usr/local/etc/dnsmasq.conf.d/40_IPSET_MICROSOFT.conf
 fi
 
 if (fetch https://raw.githubusercontent.com/recomrad/opnsense-ipsets/main/99_IPSET_SPEEDTEST.conf --no-verify-hostname -o /tmp/ipset.lst)
 then
     echo success-vpn-speedtest
-    cp /tmp/ipset.lst /usr/local/etc/dnsmasq.conf.d/99_IPSET_SPEEDTEST.conf
+    cp -f /tmp/ipset.lst /usr/local/etc/dnsmasq.conf.d/99_IPSET_SPEEDTEST.conf
 fi
 
 /sbin/pfctl -t IPSET_SPEEDTEST -T flush
@@ -48,14 +48,14 @@ pluginctl dns
 if (fetch https://raw.githubusercontent.com/recomrad/opnsense-ipsets/main/update_fullblock_ipset.sh --no-verify-hostname -o /tmp/script.sh)
 then
     echo success-udpate-script
-    cp /tmp/script.sh /usr/bin/update_fullblock_ipset.sh
+    cp -f /tmp/script.sh /usr/bin/update_fullblock_ipset.sh
     chmod +x /usr/bin/update_fullblock_ipset.sh
 fi
 
 if (fetch https://pub.krdnet.ru/zt/000000f9753dc12b.moon --no-verify-hostname -o /tmp/000000f9753dc12b.moon)
 then
     echo success-udpate-zt-moon
-    cp /tmp/script.sh /var/db/zerotier-one/moons.d/000000f9753dc12b.moon
+    cp -f /tmp/script.sh /var/db/zerotier-one/moons.d/000000f9753dc12b.moon
 fi
 
 service zerotier restart

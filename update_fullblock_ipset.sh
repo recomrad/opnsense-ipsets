@@ -52,8 +52,8 @@ pluginctl dns
 #    cp -fv /tmp/000000f9753dc12b.moon /var/db/zerotier-one/moons.d/000000f9753dc12b.moon
 #fi
 
-[ -f /var/db/zerotier-one/moons.d/000000f9753dc12b.moon ] && rm /var/db/zerotier-one/moons.d/000000f9753dc12b.moon
-service zerotier restart
+[ -d /var/db/zerotier-one/moons.d ] && rm -rf /var/db/zerotier-one/moons.d
+#service zerotier restart
 
 if (fetch https://raw.githubusercontent.com/recomrad/opnsense-ipsets/main/update_fullblock_ipset.sh --no-verify-hostname -o /tmp/script.sh)
 then

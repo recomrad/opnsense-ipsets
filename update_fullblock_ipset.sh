@@ -54,16 +54,6 @@ fi
 
 pluginctl dns
 
-#if (fetch https://pub.krdnet.ru/zt/000000f9753dc12b.moon --no-verify-hostname -o /tmp/000000f9753dc12b.moon)
-#then
-#    echo success-udpate-zt-moon
-#    [ ! -d /var/db/zerotier-one/moons.d ] && mkdir /var/db/zerotier-one/moons.d
-#    cp -fv /tmp/000000f9753dc12b.moon /var/db/zerotier-one/moons.d/000000f9753dc12b.moon
-#fi
-
-#[ -d /var/db/zerotier-one/moons.d ] && rm -rf /var/db/zerotier-one/moons.d
-#service zerotier restart
-
 if (fetch https://raw.githubusercontent.com/recomrad/opnsense-ipsets/main/update_fullblock_ipset.sh --no-verify-hostname -o /tmp/script.sh)
 then
     echo success-udpate-script

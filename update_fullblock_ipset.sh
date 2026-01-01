@@ -42,6 +42,15 @@ fi
 /sbin/pfctl -t IPSET_VPN_ESSENTIAL -T flush
 /sbin/pfctl -t IPSET_VPN_RUONLY -T flush
 /sbin/pfctl -t IPSET_VPN_FULL -T flush
+/sbin/pfctl -t IPSET_VPN_YOUTUBE -T flush
+/sbin/pfctl -t IPSET_VPN_TORRENT -T flush
+/sbin/pfctl -t IPSET_VPN_TELEGRAM -T flush
+/sbin/pfctl -t IPSET_STEAM -T flush
+/sbin/pfctl -t IPSET_CDN_AKAMAI -T flush
+/sbin/pfctl -t IPSET_CDN_CLOUDFRONT -T flush
+/sbin/pfctl -t IPSET_CDN_AMAZON -T flush
+/sbin/pfctl -t IPSET_CDN_EDGENEXT -T flush
+/sbin/pfctl -t IPSET_RU_ZONE -T flush
 
 pluginctl dns
 

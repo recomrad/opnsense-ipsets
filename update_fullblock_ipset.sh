@@ -6,6 +6,18 @@ then
     sed -e 's/vpn_domains/IPSET_VPN_FULL/g' /tmp/ipset.lst > /usr/local/etc/dnsmasq.conf.d/50_IPSET_VPN_FULL.conf
 fi
 
+if (fetch https://raw.githubusercontent.com/itdoginfo/allow-domains/refs/heads/main/Services/google_ai.lst --no-verify-hostname -o /tmp/ipset.lst)
+then 
+    echo success-vpn-googleai
+    while read -r domain; do
+        # пропуск пустых строк и комментариев
+        [ -z "$domain" ] && continue
+        case "$domain" in \#*) continue ;; esac
+    
+        printf 'ipset=/%s/%s\n' "$domain" "IPSET_VPN_FULL" >> /usr/local/etc/dnsmasq.conf.d/50_IPSET_VPN_FULL.conf
+    done < "/tmp/ipset.lst"
+fi
+
 if (fetch https://raw.githubusercontent.com/itdoginfo/allow-domains/main/Russia/outside-dnsmasq-ipset.lst --no-verify-hostname -o /tmp/ipset.lst)
 then
     echo success-vpn-ru

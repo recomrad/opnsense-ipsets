@@ -108,11 +108,8 @@ resolve_ipset_domains() {
     done < "$input"
 }
 
-if ( "$CURRENT_DOW" == "1")
-then
-    resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/20_IPSET_VPN_ESSENTIAL.conf
-    resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/30_IPSET_KINO.conf
-    resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/40_IPSET_MICROSOFT.conf
-    resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/99_IPSET_SPEEDTEST.conf
-    resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/60_IPSET_VPN_RUONLY.conf
-fi
+resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/20_IPSET_VPN_ESSENTIAL.conf
+resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/30_IPSET_KINO.conf
+resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/40_IPSET_MICROSOFT.conf
+resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/99_IPSET_SPEEDTEST.conf
+resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/60_IPSET_VPN_RUONLY.conf

@@ -48,21 +48,26 @@ then
     cp -fv /tmp/ipset.lst /usr/local/etc/dnsmasq.conf.d/99_IPSET_SPEEDTEST.conf
 fi
 
-/sbin/pfctl -t IPSET_SPEEDTEST -T flush
-/sbin/pfctl -t IPSET_MICROSOFT -T flush
-/sbin/pfctl -t IPSET_KINO -T flush
-/sbin/pfctl -t IPSET_VPN_ESSENTIAL -T flush
-/sbin/pfctl -t IPSET_VPN_RUONLY -T flush
-/sbin/pfctl -t IPSET_VPN_FULL -T flush
-/sbin/pfctl -t IPSET_VPN_YOUTUBE -T flush
-/sbin/pfctl -t IPSET_VPN_TORRENT -T flush
-/sbin/pfctl -t IPSET_VPN_TELEGRAM -T flush
-/sbin/pfctl -t IPSET_STEAM -T flush
-/sbin/pfctl -t IPSET_CDN_AKAMAI -T flush
-/sbin/pfctl -t IPSET_CDN_CLOUDFRONT -T flush
-/sbin/pfctl -t IPSET_CDN_AMAZON -T flush
-/sbin/pfctl -t IPSET_CDN_EDGENEXT -T flush
-/sbin/pfctl -t IPSET_RU_ZONE -T flush
+CURRENT_DOW=$(date +%u)
+
+if ( "$CURRENT_DOW" == "1")
+then
+    /sbin/pfctl -t IPSET_SPEEDTEST -T flush
+    /sbin/pfctl -t IPSET_MICROSOFT -T flush
+    /sbin/pfctl -t IPSET_KINO -T flush
+    /sbin/pfctl -t IPSET_VPN_ESSENTIAL -T flush
+    /sbin/pfctl -t IPSET_VPN_RUONLY -T flush
+    /sbin/pfctl -t IPSET_VPN_FULL -T flush
+    /sbin/pfctl -t IPSET_VPN_YOUTUBE -T flush
+    /sbin/pfctl -t IPSET_VPN_TORRENT -T flush
+    /sbin/pfctl -t IPSET_VPN_TELEGRAM -T flush
+    /sbin/pfctl -t IPSET_STEAM -T flush
+    /sbin/pfctl -t IPSET_CDN_AKAMAI -T flush
+    /sbin/pfctl -t IPSET_CDN_CLOUDFRONT -T flush
+    /sbin/pfctl -t IPSET_CDN_AMAZON -T flush
+    /sbin/pfctl -t IPSET_CDN_EDGENEXT -T flush
+    /sbin/pfctl -t IPSET_RU_ZONE -T flush
+fi
 
 pluginctl dns
 

@@ -50,7 +50,7 @@ fi
 
 CURRENT_DOW=$(date +%u)
 
-if ( "$CURRENT_DOW" == "1")
+if [ "$CURRENT_DOW" == "1" ];
 then
     /sbin/pfctl -t IPSET_SPEEDTEST -T flush
     /sbin/pfctl -t IPSET_MICROSOFT -T flush
@@ -79,47 +79,37 @@ then
 fi
 
 resolve_domain() {
-    domain="$1"
-    
-    [ -r "$domain" ] || return 1
-    
-    ips="$(dig +short @127.0.0.1 -p 5353 $domain | tr '\n' ' ')"
-    
-    if [ -n "$ips" ]; then
-        printf "%s %s\n" "$domain" "$ips"
-    fi
+    domain="$1"    
+    [ -z "$domain" ] && continue    
+    ips="$(dig +short @127.0.0.1 -p 5353 $domain | tr '\n' ' ')"    
+    [ -n "$ips" ] && printf "%s %s\n" "$domain" "$ips"
 }
 
 resolve_ipset_domains() {
     input="$1"
     echo "Resolving $input"
-
     [ -r "$input" ] || return 1
-
     while IFS= read -r line; do
         case "$line" in
             ""|\#*) continue ;;
         esac
-
         rest="${line#ipset=}"
         setname="${rest##*/}"
         domains="${rest%/$setname}"
 
         OLDIFS="$IFS"
         IFS='/'
-        for d in $domains; do
-            [ -z "$d" ] && continue
+        for d in $domains; do            
             resolve_domain "$d"
-        done
+        done        
         IFS="$OLDIFS"
-
     done < "$input"
 }
 
 resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/20_IPSET_VPN_ESSENTIAL.conf
 resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/30_IPSET_KINO.conf
 resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/40_IPSET_MICROSOFT.conf
-resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/99_IPSET_SPEEDTEST.conf
 resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/60_IPSET_VPN_RUONLY.conf
+resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/99_IPSET_SPEEDTEST.conf
 
 resolve_domain 2ip.ru

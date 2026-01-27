@@ -78,6 +78,18 @@ then
     chmod +x /usr/bin/update_fullblock_ipset.sh
 fi
 
+resolve_domain() {
+    domain="$1"
+    
+    [ -r "$domain" ] || return 1
+    
+    ips="$(dig +short @127.0.0.1 -p 5353 $domain | tr '\n' ' ')"
+    
+    if [ -n "$ips" ]; then
+        printf "%s %s\n" "$domain" "$ips"
+    fi
+}
+
 resolve_ipset_domains() {
     input="$1"
 
@@ -96,12 +108,7 @@ resolve_ipset_domains() {
         IFS='/'
         for d in $domains; do
             [ -z "$d" ] && continue
-            ips="$(dig +short @127.0.0.1 -p 5353 $d | tr '\n' ' ')"
-            if [ -n "$ips" ]; then
-                printf "%s %s\n" "$d" "$ips"
-            else
-                printf "%s NOANSWER\n" "$d"
-            fi
+            resolve_domain $d
         done
         IFS="$OLDIFS"
 
@@ -113,3 +120,5 @@ resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/30_IPSET_KINO.conf
 resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/40_IPSET_MICROSOFT.conf
 resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/99_IPSET_SPEEDTEST.conf
 resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/60_IPSET_VPN_RUONLY.conf
+
+resolve_domain 2ip.ru

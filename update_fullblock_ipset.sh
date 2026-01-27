@@ -108,7 +108,7 @@ resolve_ipset_domains() {
         IFS='/'
         for d in $domains; do
             [ -z "$d" ] && continue
-            resolve_domain $d
+            resolve_domain "$d"
         done
         IFS="$OLDIFS"
 

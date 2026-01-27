@@ -96,7 +96,12 @@ resolve_ipset_domains() {
         IFS='/'
         for d in $domains; do
             [ -z "$d" ] && continue
-            dig +short @127.0.0.1 -p 5353 "$d" >/dev/null 2>&1
+            ips="$(dig +short @127.0.0.1 -p 5353 "$d" | tr '\n' ' ')"
+            if [ -n "$ips" ]; then
+                printf "%s %s\n" "$d" "$ips"
+            else
+                printf "%s NOANSWER\n" "$d"
+            fi
         done
         IFS="$OLDIFS"
 

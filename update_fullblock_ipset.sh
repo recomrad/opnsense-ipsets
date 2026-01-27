@@ -77,3 +77,34 @@ then
     cp -fv /tmp/script.sh /usr/bin/update_fullblock_ipset.sh
     chmod +x /usr/bin/update_fullblock_ipset.sh
 fi
+
+resolve_ipset_domains() {
+    input="$1"
+
+    [ -r "$input" ] || return 1
+
+    while IFS= read -r line; do
+        case "$line" in
+            ""|\#*) continue ;;
+        esac
+
+        rest="${line#ipset=}"
+        setname="${rest##*/}"
+        domains="${rest%/$setname}"
+
+        OLDIFS="$IFS"
+        IFS='/'
+        for d in $domains; do
+            [ -z "$d" ] && continue
+            dig +short @127.0.0.1 -p 5353 "$d" >/dev/null 2>&1
+        done
+        IFS="$OLDIFS"
+
+    done < "$input"
+}
+
+resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/20_IPSET_VPN_ESSENTIAL.conf
+resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/30_IPSET_KINO.conf
+resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/40_IPSET_MICROSOFT.conf
+resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/99_IPSET_SPEEDTEST.conf
+resolve_ipset_domains /usr/local/etc/dnsmasq.conf.d/60_IPSET_VPN_RUONLY.conf

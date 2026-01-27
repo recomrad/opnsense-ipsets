@@ -92,6 +92,7 @@ resolve_domain() {
 
 resolve_ipset_domains() {
     input="$1"
+    echo "Resolving $input"
 
     [ -r "$input" ] || return 1
 

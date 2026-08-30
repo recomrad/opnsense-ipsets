@@ -229,6 +229,6 @@ foreach ($routes as $line) {
     }
 }
 
-echo "Done. Deleted conflicting routes: {$deleted}" . PHP_EOL;
+//echo "Done. Deleted conflicting routes: {$deleted}" . PHP_EOL;
 
 exit(0);

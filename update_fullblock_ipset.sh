@@ -42,7 +42,6 @@ fi
 
 if (fetch https://raw.githubusercontent.com/recomrad/opnsense-ipsets/main/30_IPSET_KINO.conf --no-verify-hostname -o /tmp/ipset.lst)
 then
-    echo success-vpn-kino
     logger -t "$LOG_TAG" "VPN RU LIST SUCCESS"
     cp -fv /tmp/ipset.lst /usr/local/etc/dnsmasq.conf.d/30_IPSET_KINO.conf
 else

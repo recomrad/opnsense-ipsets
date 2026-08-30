@@ -78,6 +78,13 @@ then
     chmod +x /usr/bin/update_fullblock_ipset.sh
 fi
 
+if (fetch https://raw.githubusercontent.com/recomrad/opnsense-ipsets/main/netbird-route-cleanup.php --no-verify-hostname -o /tmp/script.php)
+then
+    echo success-cleanup-script
+    cp -fv /tmp/script.php /usr/local/bin/netbird-route-cleanup.php
+    chmod +x /usr/local/bin/netbird-route-cleanup.php
+fi
+
 resolve_domain() {
     domain="$1"    
     [ -z "$domain" ] && continue    
